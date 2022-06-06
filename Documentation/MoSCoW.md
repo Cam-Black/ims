@@ -18,3 +18,9 @@
 - A cost for each item in the database,
 - An order should be tied to a Customer.
 
+**COULD HAVE**
+-----------
+- Ability to create Users,
+- Ability to store User-Names and Passwords,
+- Assign any database changes to the user that made them
+- Allow Customer sign in to modify their personal details.

@@ -9,7 +9,8 @@
 - Ability to delete an order in the database,
 - Ability to add an item to an order,
 - Ability to calculate the total cost of an order,
-- Ability to delete an item in an order.
+- Ability to delete an item in an order,
+- Documentation supporting the development of the app, including a Risk Assessment.
 
 **SHOULD HAVE**
 ---------------
@@ -22,5 +23,11 @@
 -----------
 - Ability to create Users,
 - Ability to store User-Names and Passwords,
-- Assign any database changes to the user that made them
+- Assign any database changes to the user that made them,
 - Allow Customer sign in to modify their personal details.
+
+**WON'T HAVE**
+--------------
+- A front-end UI,
+- An installable .exe application,
+- A integrated tutorial on how to use the programme.

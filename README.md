@@ -76,7 +76,7 @@ GitHub used as the online repository hosting service.
 ## Authors
 
 * **Jordan Benbelaid** - *Start Point* - [jordanbenbelaid](https://github.com/jordanbenbelaid/IMS-22EnableMay2)
-* **Cameron Black** - *Continued development* - [cam-black](https://github.com/cam-black/ims)
+* **Cameron Black** - *Continued Development* - [cam-black](https://github.com/cam-black/ims)
 
 ## License
 

@@ -1,5 +1,5 @@
 Coverage: 34%
-# Project Title
+# Inventory Management System
 
 One Paragraph of project description goes here
 
@@ -70,11 +70,13 @@ Add additional notes about how to deploy this on a live system
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning.
+Git was used for Version Control.
+GitHub used as the online repository hosting service.
 
 ## Authors
 
-* **Chris Perrins** - *Initial work* - [christophperrins](https://github.com/christophperrins)
+* **Jordan Benbelaid** - *Start Point* - [jordanbenbelaid](https://github.com/jordanbenbelaid/IMS-22EnableMay2)
+* **Cameron Black** - *Continued Development* - [cam-black](https://github.com/cam-black/ims)
 
 ## License
 
@@ -84,8 +86,4 @@ This project is licensed under the MIT license - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
-# IMS-Start
-# IMS-Start
+- 

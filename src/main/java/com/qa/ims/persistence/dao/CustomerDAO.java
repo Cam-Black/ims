@@ -112,9 +112,9 @@ public class CustomerDAO implements Dao<Customer> {
 						.prepareStatement("UPDATE customers SET first_name = ?, surname = ? WHERE customer_id = ?");) {
 			statement.setString(1, customer.getFirstName());
 			statement.setString(2, customer.getSurname());
-			statement.setLong(3, customer.getId());
+			statement.setLong(3, customer.getCustomerId());
 			statement.executeUpdate();
-			return read(customer.getId());
+			return read(customer.getCustomerId());
 		} catch (Exception e) {
 			LOGGER.debug(e);
 			LOGGER.error(e.getMessage());

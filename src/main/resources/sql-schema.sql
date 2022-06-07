@@ -1,8 +1,8 @@
-DROP SCHEMA IF EXISTS ims;
 
-CREATE SCHEMA IF NOT EXISTS `ims`;
-
-USE `ims` ;
+DROP TABLE `ims`.`order_items`;
+DROP TABLE `ims`.`orders`;
+DROP TABLE `ims`.`customers`;
+DROP TABLE `ims`.`items`;
 
 CREATE TABLE IF NOT EXISTS `ims`.`customers` (
     `customer_id` INT AUTO_INCREMENT,
@@ -20,8 +20,9 @@ CREATE TABLE IF NOT EXISTS `ims`.`items` (
 
 CREATE TABLE IF NOT EXISTS `ims`.`orders` (
 	`order_id` INT AUTO_INCREMENT,
-    `fk_customer_id` INT REFERENCES `ims`.`customers` (`customer_id`),
-    PRIMARY KEY (`order_id`)
+    `fk_customer_id` INT NOT NULL,
+    PRIMARY KEY (`order_id`),
+    FOREIGN KEY (`fk_customer_id`) REFERENCES `ims`.`customers` (`customer_id`)
 );
 
 CREATE TABLE IF NOT EXISTS `ims`.`order_items` (

@@ -22,6 +22,6 @@ public class Order {
 	@Override
 	public String toString() {
 		String name = customer.getFirstName() + " " + customer.getSurname();
-		return "orderId: " + orderId + ", Customer Name: " + name + ", Product: " + item.getItemName() + ", Quantity: " + itemQuantity + ", Total Cost: " + (item.getItemCost() * itemQuantity);
+		return "Order ID: " + orderId + ", Customer ID: " + customer.getCustomerId() + ", Customer Name: " + name + ", Item ID: "+ item.getItemID() +", Item Name: " + item.getItemName() + ", Quantity: " + itemQuantity + ", Total Cost: " + (item.getItemCost() * itemQuantity);
 	}
 }

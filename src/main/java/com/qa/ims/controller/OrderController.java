@@ -1,5 +1,7 @@
 package com.qa.ims.controller;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -7,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.qa.ims.persistence.dao.OrderDAO;
 import com.qa.ims.persistence.domain.Order;
+import com.qa.ims.utils.DBUtils;
 import com.qa.ims.utils.Utils;
 
 public class OrderController implements CrudController<Order> {
@@ -45,8 +48,10 @@ public class OrderController implements CrudController<Order> {
 
 	@Override
 	public int delete() {
-		// TODO Auto-generated method stub
-		return 0;
+		LOGGER.info("Please enter the id of the item you would like to delete");
+		Long id = utils.getLong();
+		LOGGER.info("");
+		return orderDAO.delete(id);
 	}
 	
 }

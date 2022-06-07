@@ -6,7 +6,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.qa.ims.persistence.dao.ItemDAO;
-import com.qa.ims.persistence.domain.Customer;
 import com.qa.ims.persistence.domain.Item;
 import com.qa.ims.utils.Utils;
 
@@ -47,8 +46,16 @@ public class ItemController implements CrudController<Item> {
 
 	@Override
 	public Item update() {
-		// TODO Auto-generated method stub
-		return null;
+		LOGGER.info("Please enter the id of the item you would like to update");
+		Long id = utils.getLong();
+		LOGGER.info("Please enter the new item name");
+		String itemName = utils.getString();
+		LOGGER.info("Please enter the new item price");
+		double itemCost= utils.getDouble();
+		Item item = itemDAO.update(new Item(id, itemName, itemCost));
+		LOGGER.info("Item Updated\n");
+		LOGGER.info(item + "\n");
+		return item;
 	}
 
 	@Override

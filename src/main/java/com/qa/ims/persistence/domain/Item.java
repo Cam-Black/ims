@@ -42,8 +42,6 @@ public class Item {
 		this.item_cost = item_cost;
 	}
 
-
-
 	@Override
 	public String toString() {
 		return "item_id: " + item_id + ", item_name: " + item_name + ", item_cost: " + item_cost;

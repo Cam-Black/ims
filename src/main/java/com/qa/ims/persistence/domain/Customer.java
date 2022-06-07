@@ -50,7 +50,7 @@ public class Customer {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(firstName, surname);
+		return Objects.hash(customerId, firstName, surname);
 	}
 
 	@Override
@@ -62,6 +62,9 @@ public class Customer {
 		if (getClass() != obj.getClass())
 			return false;
 		Customer other = (Customer) obj;
-		return Objects.equals(firstName, other.firstName) && Objects.equals(surname, other.surname);
+		return Objects.equals(customerId, other.customerId) && Objects.equals(firstName, other.firstName)
+				&& Objects.equals(surname, other.surname);
 	}
+
+	
 }

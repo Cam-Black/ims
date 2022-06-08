@@ -42,11 +42,8 @@ public class OrderDAO implements Dao<Order> {
 	public Order ordersFromResultSet(ResultSet rs) throws SQLException {
 		Long orderId = rs.getLong("order_id");
 		Long custId = rs.getLong("fk_customer_id");
-//		String custFName = rs.getString("first_name");
-//		String custLName = rs.getString("surname");
 		Customer customer = new Customer(custId);
 		Order order = new Order(customer, orderId);
-//		order.setCustomerId(custId);
 		return order;
 	}
 	
@@ -54,11 +51,10 @@ public class OrderDAO implements Dao<Order> {
 	public List<Order> readAll() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-//				ResultSet resultSet = statement.executeQuery("SELECT orders.order_id, customers.customer_id, customers.first_name, customers.surname, items.item_id, items.item_name, order_items.item_quantity, items.item_cost FROM orders INNER JOIN order_items ON orders.order_id = order_items.fk_order_id INNER JOIN items ON items.item_id = order_items.fk_item_id INNER JOIN customers ON customers.customer_id = orders.fk_customer_id ORDER BY order_id;");) {
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM orders ORDER BY order_id");) {
+				ResultSet resultSet = statement.executeQuery("SELECT o.order_id, c.customer_id, c.first_name, c.surname, i.item_id, i.item_name, i.item_cost, oi.item_quantity FROM orders o LEFT OUTER JOIN order_items oi ON o.order_id = oi.fk_order_id LEFT OUTER JOIN items i ON i.item_id = oi.fk_item_id LEFT OUTER JOIN customers c ON c.customer_id = o.fk_customer_id ORDER BY order_id");) {
 			List<Order> orders = new ArrayList<>();
 			while (resultSet.next()) {
-				orders.add(ordersFromResultSet(resultSet));
+				orders.add(modelFromResultSet(resultSet));
 			}
 			return orders;
 		} catch (SQLException e) {

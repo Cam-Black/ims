@@ -110,10 +110,21 @@ public class OrderDAO implements Dao<Order> {
 
 	@Override
 	public Order update(Order order) {
-		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	public Order addItem(Order order) {
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection
+						.prepareStatement("INSERT INTO order_items (fk_item_id, item_quantity) VALUES (?, ?) WHERE fk_order_id = ?");) {
+			statement.setLong(1, order.getOrderId());
+		}  catch (Exception e) {
+			LOGGER.debug(e);
+			LOGGER.error(e.getMessage());
+		}
+		return order;
+	}
+	
 	@Override
 	public int delete(long id) {
 		try (Connection connection = DBUtils.getInstance().getConnection();

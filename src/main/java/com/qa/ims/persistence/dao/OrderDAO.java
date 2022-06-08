@@ -116,13 +116,18 @@ public class OrderDAO implements Dao<Order> {
 	public Order addItem(Order order) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection
-						.prepareStatement("INSERT INTO order_items (fk_item_id, item_quantity) VALUES (?, ?) WHERE fk_order_id = ?");) {
-			statement.setLong(1, order.getOrderId());
+						.prepareStatement("INSERT INTO order_items (fk_item_id, item_quantity) VALUES (?,?) WHERE fk_order_id = ?");) {
+			statement.setLong(1, order.getItemId());
+			statement.setInt(2, order.getItemQuantity());
+			statement.setLong(3, order.getOrderId());
+			statement.executeUpdate();
+			System.out.println(order);
+			return read(order.getOrderId());
 		}  catch (Exception e) {
 			LOGGER.debug(e);
 			LOGGER.error(e.getMessage());
 		}
-		return order;
+		return null;
 	}
 	
 	@Override

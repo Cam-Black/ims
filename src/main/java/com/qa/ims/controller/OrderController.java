@@ -1,17 +1,14 @@
 package com.qa.ims.controller;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.qa.ims.persistence.dao.CustomerDAO;
 import com.qa.ims.persistence.dao.OrderDAO;
 import com.qa.ims.persistence.domain.Customer;
+import com.qa.ims.persistence.domain.Item;
 import com.qa.ims.persistence.domain.Order;
-import com.qa.ims.utils.DBUtils;
 import com.qa.ims.utils.Utils;
 
 public class OrderController implements CrudController<Order> {
@@ -38,34 +35,37 @@ public class OrderController implements CrudController<Order> {
 
 	@Override
 	public Order create() {
-		CustomerDAO customerDAO = new CustomerDAO();
 		LOGGER.info("Please enter the customer ID for the new order");
 		Long id = utils.getLong();
-		customerDAO.read(id);
 		Customer customer = new Customer();
 		customer.setCustomerId(id);
 		Order order = orderDAO.create(new Order(customer));
-		LOGGER.info("order created\n");
+		LOGGER.info("Order Created\n");
 		LOGGER.info(order + "\n");
 		return order;
 	}
 
 	@Override
 	public Order update() {
-		OrderDAO orderDAO = new OrderDAO();
-		LOGGER.info("Select the order id of the order you wish to update");
+		LOGGER.info("Please enter the id of the order you would like to update");
 		Long id = utils.getLong();
-		LOGGER.info("Would you like to add or delete an item from an order");
-		String addOrDelete = utils.getString();
-		
-		return null;
+//		LOGGER.info("Would you like to add or delete an item from an order");
+		LOGGER.info("Please enter the ID of the item you wish to add");
+		Long itemId = utils.getLong();
+		LOGGER.info("Please enter the quantity of the item to add");
+		int quantity = utils.getInt();
+		Item item = new Item(itemId);
+		System.out.println(item);
+		Order order = orderDAO.addItem(new Order(item, quantity, id));
+		LOGGER.info("Order Updated\n");
+		return order;
 	}
 
 	@Override
 	public int delete() {
 		LOGGER.info("Please enter the ID of the Order you would like to delete");
 		Long id = utils.getLong();
-		LOGGER.info("");
+		LOGGER.info("Order Deleted\n");
 		return orderDAO.delete(id);
 	}
 	

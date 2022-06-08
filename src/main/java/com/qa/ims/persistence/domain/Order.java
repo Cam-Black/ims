@@ -5,8 +5,10 @@ public class Order {
 	private Customer customer;
 	private Item item;
 	private int itemQuantity;
-	private long customerId;
-
+	private Long customerId;
+	private Long itemId;
+	
+	
 	public Order(Customer customer) {
 		this.customer = customer;
 	}
@@ -33,7 +35,19 @@ public class Order {
 		this.itemQuantity = itemQuantity;
 	}
 
+	public Order(Item item, int quantity, Long orderId) {
+		this.item = item;
+		this.itemQuantity = quantity;
+		this.orderId = orderId;
+	}
+
+	public Order(Item item, Long orderItemsId) {
+		this.item = item;
+		this.orderId = orderItemsId;
+	}
+
 	public Long getCustomerId() {
+		System.out.println(this.customerId);
 		return this.customerId;
 	}
 
@@ -52,7 +66,9 @@ public class Order {
 	public Customer getCustomer() {
 		return this.customer;
 	}
-
+	 public Long getItemId() {
+		 return this.itemId;
+	 }
 	public void setOrderId(Long orderId) {
 		this.orderId = orderId;
 	}

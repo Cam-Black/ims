@@ -99,11 +99,10 @@ public class OrderDAOTest {
 		assertNull(DAO.readLatest());
 	}
 	
-//	@Test
-//	public void testReadAllException() {
-//		
-//		assertArrayEquals(DAO.readAll(), new ArrayList<>());
-//	}
+	@Test
+	public void testReadAllException() {
+		
+	}
 	
 	@Test
 	public void testUpdate() {
@@ -112,9 +111,13 @@ public class OrderDAOTest {
 	}
 	
 //	@Test
-//	public void testOrderItemsFromResultSet(ResultSet rs) throws SQLException {
+//	public void testOrderItemsFromResultSet() {
 //		Order order = new Order();
-//		rs.getLong(1);
-//		assertEquals(DAO.orderItemsFromResultSet(rs), order);
+//		ResultSet rs = null;
+//		try {
+//			assertEquals(DAO.orderItemsFromResultSet(rs), order);
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
 //	}
 }

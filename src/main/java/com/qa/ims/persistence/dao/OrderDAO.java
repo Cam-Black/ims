@@ -140,7 +140,7 @@ public class OrderDAO implements Dao<Order> {
 	
 	public void removeItem(Order order) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
-				PreparedStatement statementOne = connection.prepareStatement("UPDATE order_items SET item_quantity = item_quantity - 1 WHERE item_quantity >= 0 AND fk_item_id = 1 AND fk_order_id = 1 ORDER BY order_items_id DESC LIMIT 1");
+				PreparedStatement statementOne = connection.prepareStatement("UPDATE order_items SET item_quantity = item_quantity - 1 WHERE item_quantity >= 0 AND fk_item_id = ? AND fk_order_id = ? ORDER BY order_items_id DESC LIMIT 1");
 				PreparedStatement statementTwo = connection.prepareStatement("DELETE FROM order_items WHERE item_quantity = 0");) {
 			statementOne.setLong(1, order.getItemId());
 			statementOne.setLong(2, order.getOrderId());

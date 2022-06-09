@@ -23,6 +23,7 @@ import com.qa.ims.utils.Utils;
 
 @RunWith(MockitoJUnitRunner.class)
 public class OrderControllerTest {
+	
 	@Mock
 	private Utils utils;
 
@@ -36,21 +37,16 @@ public class OrderControllerTest {
 	public void testCreate() {
 		final Long O_ID= 1L;
 		final Long C_ID= 1L;
-		final Long I_ID= 1L;
 		CustomerDAO custDao = new CustomerDAO();
 		Customer customer = new Customer(C_ID);
 		customer = custDao.read(C_ID);
-		ItemDAO itemDao = new ItemDAO();
-		Item item = new Item(I_ID);
-		item = itemDao.read(I_ID);
-		final Order created = new Order(O_ID, customer, item);
-
-		Mockito.when(utils.getLong()).thenReturn(O_ID, C_ID);
+		Order created = new Order(customer, O_ID);
+		Mockito.when(utils.getLong()).thenReturn(C_ID);
 		Mockito.when(dao.create(created)).thenReturn(created);
 
 		assertEquals(created, controller.create());
 
-		Mockito.verify(utils, Mockito.times(2)).getLong();
+		Mockito.verify(utils, Mockito.times(1)).getLong();
 		Mockito.verify(dao, Mockito.times(1)).create(created);
 	}
 

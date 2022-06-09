@@ -46,6 +46,12 @@ public class Order {
 		this.orderId = orderItemsId;
 	}
 
+	public Order(Item item) {
+		this.item = item;
+	}
+
+	public Order() {}
+
 	public Long getCustomerId() {
 		System.out.println(this.customerId);
 		return this.customerId;
@@ -87,6 +93,10 @@ public class Order {
 
 	public void setCustomerId(long customerId) {
 		this.customerId = customerId;
+	}
+	
+	public void setItemId(long itemId) {
+		this.itemId = itemId;
 	}
 
 	@Override

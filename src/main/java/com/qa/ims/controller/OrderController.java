@@ -50,18 +50,32 @@ public class OrderController implements CrudController<Order> {
 	public Order update() {
 		LOGGER.info("Please enter the id of the order you would like to update");
 		Long id = utils.getLong();
-//		LOGGER.info("Would you like to add or delete an item from an order");
-		LOGGER.info("Please enter the ID of the item you wish to add");
-		Long itemId = utils.getLong();
-		LOGGER.info("Please enter the quantity of the item to add");
-		int quantity = utils.getInt();
-		Item item = new Item(itemId);
-		ItemDAO itemDao = new ItemDAO();
-		item = itemDao.read(item.getItemID());
-		System.out.println(item);
-		Order order = orderDAO.addItem(new Order(item.getItemID(), quantity, id));
-		LOGGER.info("Order Updated\n");
-		return order;
+		LOGGER.info("Would you like to add or delete an item from an order");
+		String addOrDelete = utils.getString();
+		addOrDelete = addOrDelete.toLowerCase();
+		if (addOrDelete.equals("add")) {
+			LOGGER.info("Please enter the ID of the item you wish to add");
+			Long itemId = utils.getLong();
+			LOGGER.info("Please enter the quantity of the item to add");
+			int quantity = utils.getInt();
+			Item item = new Item(itemId);
+			ItemDAO itemDao = new ItemDAO();
+			item = itemDao.read(item.getItemID());
+			Order order = orderDAO.addItem(new Order(item.getItemID(), quantity, id));
+			LOGGER.info("Order Updated\n");
+			return order;
+		} 
+		else if (addOrDelete.equals("delete")) {
+			LOGGER.info("Please enter the id of the item you wish to remove");
+			Long itemId = utils.getLong();
+			Order order = new Order();
+			order.setOrderId(id);
+			order.setItemId(itemId);
+			orderDAO.removeItem(order);
+			LOGGER.info("Order Updated\n");
+			return order;
+		}
+		return null;
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package com.qa.ims.persistence.domain;
 
+import java.util.Objects;
+
 public class Order {
 	private Long orderId;
 	private Customer customer;
@@ -8,7 +10,8 @@ public class Order {
 	private Long customerId;
 	private Long itemId;
 	
-	
+	public Order() {}
+
 	public Order(Customer customer) {
 		this.customer = customer;
 	}
@@ -34,6 +37,12 @@ public class Order {
 		this.item = item;
 		this.itemQuantity = itemQuantity;
 	}
+	
+	public Order(Long orderId, Customer customer, Item item) {
+		this.orderId = orderId;
+		this.customer = customer;
+		this.item = item;
+	}
 
 	public Order(Long itemId, int quantity, Long orderId) {
 		this.itemId = itemId;
@@ -49,8 +58,6 @@ public class Order {
 	public Order(Item item) {
 		this.item = item;
 	}
-
-	public Order() {}
 
 	public Long getCustomerId() {
 		System.out.println(this.customerId);
@@ -109,4 +116,25 @@ public class Order {
 			return "Order ID: " + orderId + ", Customer ID: " + customer.getCustomerId() + ", Customer Name: " + name + ", Item ID: " + item.getItemID() + ", Item Name: " + item.getItemName() + ", Quantity: " + itemQuantity + ", Total Cost: " + (item.getItemCost() * itemQuantity);
 		}
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(customer, customerId, item, itemId, itemQuantity, orderId);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Order other = (Order) obj;
+		return Objects.equals(customer, other.customer) && Objects.equals(customerId, other.customerId)
+				&& Objects.equals(item, other.item) && Objects.equals(itemId, other.itemId)
+				&& itemQuantity == other.itemQuantity && Objects.equals(orderId, other.orderId);
+	}
+	
+	
 }

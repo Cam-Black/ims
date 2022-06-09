@@ -59,6 +59,11 @@ public class Order {
 		this.item = item;
 	}
 
+	public Order(Long orderId, Long custId) {
+		this.orderId = orderId;
+		this.customerId = custId;
+	}
+
 	public Long getCustomerId() {
 		System.out.println(this.customerId);
 		return this.customerId;

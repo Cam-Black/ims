@@ -138,7 +138,7 @@ public class OrderDAO implements Dao<Order> {
 		return null;
 	}
 	
-	public Order removeItem(Order order) {
+	public void removeItem(Order order) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statementOne = connection.prepareStatement("UPDATE order_items SET item_quantity = item_quantity - 1 WHERE item_quantity >= 0 AND fk_item_id = 1 AND fk_order_id = 1 ORDER BY order_items_id DESC LIMIT 1");
 				PreparedStatement statementTwo = connection.prepareStatement("DELETE FROM order_items WHERE item_quantity = 0");) {
@@ -150,7 +150,6 @@ public class OrderDAO implements Dao<Order> {
 			LOGGER.debug(e);
 			LOGGER.error(e.getMessage());
 		}
-		return null;
 	}
 	
 	@Override

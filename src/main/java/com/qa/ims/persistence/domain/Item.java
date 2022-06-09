@@ -18,6 +18,12 @@ public class Item {
 		this.setItemCost(itemCost);
 	}
 
+	public Item() {}
+
+	public Item(Long itemId) {
+		this.itemID = itemId;
+	}
+
 	public Long getItemID() {
 		return itemID;
 	}

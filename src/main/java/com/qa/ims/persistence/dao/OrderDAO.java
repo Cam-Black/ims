@@ -63,7 +63,16 @@ public class OrderDAO implements Dao<Order> {
 		}
 		return new ArrayList<>();
 	}
-
+	
+	public Order orderItemsFromResultSet(ResultSet rs) throws SQLException {
+		Long orderId = rs.getLong("order_items_id");
+		Long itemId = rs.getLong("item_id");
+		String itemName = rs.getString("item_name");
+		double itemCost = rs.getDouble("item_cost");
+		Item item = new Item(itemId, itemName, itemCost);
+		Order order = new Order(item, orderId);
+		return order;
+	}
 	@Override
 	public Order read(Long id) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
@@ -71,7 +80,7 @@ public class OrderDAO implements Dao<Order> {
 			statement.setLong(1, id);
 			try (ResultSet resultSet = statement.executeQuery();) {
 				resultSet.next();
-				return modelFromResultSet(resultSet);
+				return orderItemsFromResultSet(resultSet);
 			}
 		} catch (Exception e) {
 			LOGGER.debug(e);
@@ -114,11 +123,12 @@ public class OrderDAO implements Dao<Order> {
 	}
 	
 	public Order addItem(Order order) {
+		
 		try (Connection connection = DBUtils.getInstance().getConnection();
-				PreparedStatement statement = connection
-						.prepareStatement("INSERT INTO order_items (fk_item_id, item_quantity) VALUES (?,?) WHERE fk_order_id = ?");) {
-			statement.setLong(1, order.getItemId());
-			statement.setInt(2, order.getItemQuantity());
+				PreparedStatement statement = connection.prepareStatement("INSERT INTO order_items (item_quantity, fk_item_id, fk_order_id) VALUES (?,  (SELECT item_id FROM items WHERE item_id = ?), (SELECT order_id FROM orders WHERE order_id = ?));");) {
+			statement.setInt(1, order.getItemQuantity());
+			statement.setLong(2, order.getItemId());
+			
 			statement.setLong(3, order.getOrderId());
 			statement.executeUpdate();
 			System.out.println(order);

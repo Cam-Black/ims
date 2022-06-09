@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.qa.ims.persistence.dao.ItemDAO;
 import com.qa.ims.persistence.dao.OrderDAO;
 import com.qa.ims.persistence.domain.Customer;
 import com.qa.ims.persistence.domain.Item;
@@ -55,8 +56,10 @@ public class OrderController implements CrudController<Order> {
 		LOGGER.info("Please enter the quantity of the item to add");
 		int quantity = utils.getInt();
 		Item item = new Item(itemId);
+		ItemDAO itemDao = new ItemDAO();
+		item = itemDao.read(item.getItemID());
 		System.out.println(item);
-		Order order = orderDAO.addItem(new Order(item, quantity, id));
+		Order order = orderDAO.addItem(new Order(item.getItemID(), quantity, id));
 		LOGGER.info("Order Updated\n");
 		return order;
 	}

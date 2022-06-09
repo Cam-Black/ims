@@ -51,7 +51,7 @@ public class OrderDAO implements Dao<Order> {
 	public List<Order> readAll() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT o.order_id, c.customer_id, c.first_name, c.surname, i.item_id, i.item_name, i.item_cost, oi.item_quantity FROM orders o LEFT OUTER JOIN order_items oi ON o.order_id = oi.fk_order_id LEFT OUTER JOIN items i ON i.item_id = oi.fk_item_id LEFT OUTER JOIN customers c ON c.customer_id = o.fk_customer_id ORDER BY order_id");) {
+				ResultSet resultSet = statement.executeQuery("SELECT o.order_id, c.customer_id, c.first_name, c.surname, i.item_id, i.item_name, i.item_cost, oi.item_quantity FROM orders o LEFT OUTER JOIN order_items oi ON o.order_id = oi.fk_order_id LEFT OUTER JOIN items i ON i.item_id = oi.fk_item_id LEFT OUTER JOIN customers c ON c.customer_id = o.fk_customer_id ORDER BY order_items_id");) {
 			List<Order> orders = new ArrayList<>();
 			while (resultSet.next()) {
 				orders.add(modelFromResultSet(resultSet));
@@ -76,7 +76,7 @@ public class OrderDAO implements Dao<Order> {
 	@Override
 	public Order read(Long id) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
-				PreparedStatement statement = connection.prepareStatement("SELECT * FROM orders WHERE order_id = ?");) {
+				PreparedStatement statement = connection.prepareStatement("SELECT * FROM order_items LEFT OUTER JOIN items ON items.item_id = order_items.fk_item_id WHERE fk_order_id = ?");) {
 			statement.setLong(1, id);
 			try (ResultSet resultSet = statement.executeQuery();) {
 				resultSet.next();
@@ -128,10 +128,8 @@ public class OrderDAO implements Dao<Order> {
 				PreparedStatement statement = connection.prepareStatement("INSERT INTO order_items (item_quantity, fk_item_id, fk_order_id) VALUES (?,  (SELECT item_id FROM items WHERE item_id = ?), (SELECT order_id FROM orders WHERE order_id = ?));");) {
 			statement.setInt(1, order.getItemQuantity());
 			statement.setLong(2, order.getItemId());
-			
 			statement.setLong(3, order.getOrderId());
 			statement.executeUpdate();
-			System.out.println(order);
 			return read(order.getOrderId());
 		}  catch (Exception e) {
 			LOGGER.debug(e);

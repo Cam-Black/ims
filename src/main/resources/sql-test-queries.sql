@@ -10,3 +10,4 @@ SELECT * FROM orders ORDER BY order_id;
 SELECT * FROM orders o LEFT OUTER JOIN order_items oi ON o.order_id = oi.fk_order_id LEFT OUTER JOIN items i ON i.item_id = oi.fk_item_id;
 SELECT * FROM order_items ORDER BY order_items_id;
 INSERT INTO order_items (item_quantity, fk_item_id, fk_order_id) VALUES (1,  (SELECT item_id FROM items WHERE item_id= 1), (SELECT order_id FROM orders WHERE order_id=2));
+SELECT * FROM order_items LEFT OUTER JOIN items ON items.item_id = order_items.fk_item_id WHERE fk_order_id = 4;

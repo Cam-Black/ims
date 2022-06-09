@@ -1,17 +1,15 @@
 package com.qa.ims.controller;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.qa.ims.persistence.dao.CustomerDAO;
+import com.qa.ims.persistence.dao.ItemDAO;
 import com.qa.ims.persistence.dao.OrderDAO;
 import com.qa.ims.persistence.domain.Customer;
+import com.qa.ims.persistence.domain.Item;
 import com.qa.ims.persistence.domain.Order;
-import com.qa.ims.utils.DBUtils;
 import com.qa.ims.utils.Utils;
 
 public class OrderController implements CrudController<Order> {
@@ -38,26 +36,45 @@ public class OrderController implements CrudController<Order> {
 
 	@Override
 	public Order create() {
-		CustomerDAO customerDAO = new CustomerDAO();
 		LOGGER.info("Please enter the customer ID for the new order");
 		Long id = utils.getLong();
-		customerDAO.read(id);
 		Customer customer = new Customer();
 		customer.setCustomerId(id);
 		Order order = orderDAO.create(new Order(customer));
-		LOGGER.info("order created\n");
+		LOGGER.info("Order Created\n");
 		LOGGER.info(order + "\n");
 		return order;
 	}
 
 	@Override
 	public Order update() {
-		OrderDAO orderDAO = new OrderDAO();
-		LOGGER.info("Select the order id of the order you wish to update");
+		LOGGER.info("Please enter the id of the order you would like to update");
 		Long id = utils.getLong();
 		LOGGER.info("Would you like to add or delete an item from an order");
 		String addOrDelete = utils.getString();
-		
+		addOrDelete = addOrDelete.toLowerCase();
+		if (addOrDelete.equals("add")) {
+			LOGGER.info("Please enter the ID of the item you wish to add");
+			Long itemId = utils.getLong();
+			LOGGER.info("Please enter the quantity of the item to add");
+			int quantity = utils.getInt();
+			Item item = new Item(itemId);
+			ItemDAO itemDao = new ItemDAO();
+			item = itemDao.read(item.getItemID());
+			Order order = orderDAO.addItem(new Order(item.getItemID(), quantity, id));
+			LOGGER.info("Order Updated\n");
+			return order;
+		} 
+		else if (addOrDelete.equals("delete")) {
+			LOGGER.info("Please enter the id of the item you wish to remove");
+			Long itemId = utils.getLong();
+			Order order = new Order();
+			order.setOrderId(id);
+			order.setItemId(itemId);
+			orderDAO.removeItem(order);
+			LOGGER.info("Order Updated\n");
+			return order;
+		}
 		return null;
 	}
 
@@ -65,7 +82,7 @@ public class OrderController implements CrudController<Order> {
 	public int delete() {
 		LOGGER.info("Please enter the ID of the Order you would like to delete");
 		Long id = utils.getLong();
-		LOGGER.info("");
+		LOGGER.info("Order Deleted\n");
 		return orderDAO.delete(id);
 	}
 	

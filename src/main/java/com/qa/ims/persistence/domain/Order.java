@@ -5,8 +5,10 @@ public class Order {
 	private Customer customer;
 	private Item item;
 	private int itemQuantity;
-	private long customerId;
-
+	private Long customerId;
+	private Long itemId;
+	
+	
 	public Order(Customer customer) {
 		this.customer = customer;
 	}
@@ -33,7 +35,25 @@ public class Order {
 		this.itemQuantity = itemQuantity;
 	}
 
+	public Order(Long itemId, int quantity, Long orderId) {
+		this.itemId = itemId;
+		this.itemQuantity = quantity;
+		this.orderId = orderId;
+	}
+
+	public Order(Item item, Long orderItemsId) {
+		this.item = item;
+		this.orderId = orderItemsId;
+	}
+
+	public Order(Item item) {
+		this.item = item;
+	}
+
+	public Order() {}
+
 	public Long getCustomerId() {
+		System.out.println(this.customerId);
 		return this.customerId;
 	}
 
@@ -52,7 +72,9 @@ public class Order {
 	public Customer getCustomer() {
 		return this.customer;
 	}
-
+	 public Long getItemId() {
+		 return this.itemId;
+	 }
 	public void setOrderId(Long orderId) {
 		this.orderId = orderId;
 	}
@@ -71,6 +93,10 @@ public class Order {
 
 	public void setCustomerId(long customerId) {
 		this.customerId = customerId;
+	}
+	
+	public void setItemId(long itemId) {
+		this.itemId = itemId;
 	}
 
 	@Override

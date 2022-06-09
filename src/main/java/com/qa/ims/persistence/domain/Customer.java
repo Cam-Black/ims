@@ -19,6 +19,12 @@ public class Customer {
 		this.setSurname(surname);
 	}
 
+	public Customer() {}
+
+	public Customer(Long custId) {
+		this.customerId = custId;
+	}
+
 	public Long getCustomerId() {
 		return customerId;
 	}
@@ -45,7 +51,7 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return "id:" + customerId + " first name:" + firstName + " surname:" + surname;
+		return "Customer ID: " + customerId + " First Name: " + firstName + " Surname: " + surname;
 	}
 
 	@Override

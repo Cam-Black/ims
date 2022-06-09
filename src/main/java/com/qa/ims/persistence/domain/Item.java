@@ -66,8 +66,8 @@ public class Item {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Customer other = (Customer) obj;
-		return Objects.equals(customerId, other.customerId) && Objects.equals(firstName, other.firstName)
-				&& Objects.equals(surname, other.surname);
+		Item other = (Item) obj;
+		return Objects.equals(itemID, other.itemID) && Objects.equals(itemName, other.itemName)
+				&& Objects.equals(itemCost, other.itemCost);
 	}
 }

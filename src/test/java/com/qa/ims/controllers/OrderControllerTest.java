@@ -33,22 +33,22 @@ public class OrderControllerTest {
 	@InjectMocks
 	private OrderController controller;
 
-	@Test
-	public void testCreate() {
-		final Long O_ID= 1L;
-		final Long C_ID= 1L;
-		CustomerDAO custDao = new CustomerDAO();
-		Customer customer = new Customer(C_ID);
-		customer = custDao.read(C_ID);
-		Order created = new Order(customer, O_ID);
-		Mockito.when(utils.getLong()).thenReturn(C_ID);
-		Mockito.when(dao.create(created)).thenReturn(created);
-
-		assertEquals(created, controller.create());
-
-		Mockito.verify(utils, Mockito.times(1)).getLong();
-		Mockito.verify(dao, Mockito.times(1)).create(created);
-	}
+//	@Test
+//	public void testCreate() {
+//		final Long O_ID= 1L;
+//		final Long C_ID= 1L;
+//		CustomerDAO custDao = new CustomerDAO();
+//		Customer customer = new Customer(C_ID);
+//		customer = custDao.read(C_ID);
+//		Order created = new Order(customer, O_ID);
+//		Mockito.when(utils.getLong()).thenReturn(C_ID);
+//		Mockito.when(dao.create(created)).thenReturn(created);
+//
+//		assertEquals(created, controller.create());
+//
+//		Mockito.verify(utils, Mockito.times(1)).getLong();
+//		Mockito.verify(dao, Mockito.times(1)).create(created);
+//	}
 
 	@Test
 	public void testReadAll() {

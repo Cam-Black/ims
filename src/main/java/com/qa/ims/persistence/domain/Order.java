@@ -113,11 +113,15 @@ public class Order {
 
 	@Override
 	public String toString() {
-		String name = customer.getFirstName() + " " + customer.getSurname();
-		if (item == null || customer == null) {
+		if (item == null) {
 			return "Order ID: " + orderId + ", Customer ID: " + customer.getCustomerId();
 		}
+		else if (customer == null) {
+			return "Order ID: " + orderId + ", Item ID: " + item.getItemID() + ", Item Name: " + item.getItemName() + ", Quantity: " + itemQuantity + ", Total Cost: " + (item.getItemCost() * itemQuantity);
+		}
+		
 		else {
+			String name = customer.getFirstName() + " " + customer.getSurname();
 			return "Order ID: " + orderId + ", Customer ID: " + customer.getCustomerId() + ", Customer Name: " + name + ", Item ID: " + item.getItemID() + ", Item Name: " + item.getItemName() + ", Quantity: " + itemQuantity + ", Total Cost: " + (item.getItemCost() * itemQuantity);
 		}
 	}

@@ -39,9 +39,7 @@ public class OrderDAOTest {
 
 	@Test
 	public void testReadAll() {
-//		ItemDAO itemDao = new ItemDAO();
 		Item item = new Item(0L);
-//		item = itemDao.read(item.getItemID());
 		Customer customer = new Customer(1L, "jordan", "harrison");
 		List<Order> expected = new ArrayList<>();
 		expected.add(new Order(1L, customer, item));
@@ -59,38 +57,15 @@ public class OrderDAOTest {
 		
 		Long oId = 1L;
 		Long iId = 1L;
-		Long cId = 1L;
 		String iName = "Call of Duty";
 		double iCost = 25.99;
 		Item item = new Item(iId, iName, iCost);
-		Customer customer = new Customer(cId);
-		CustomerDAO custDao = new CustomerDAO();
-		customer = custDao.read(customer.getCustomerId());
-		Order order = new Order();
-		order.setOrderId(1L);
-		order.setItem(item);
-		order.setCustomer(customer);
+		Order order = new Order(item, oId);
 		System.out.println(order);
 		
-		assertEquals(DAO.read(order.getOrderId()), null);
+		assertEquals(DAO.read(1L), null);
 	}
-
-//	@Test
-//	public void testAddItem() {
-//		Order order = new Order();
-//		order.setItemQuantity(1);
-//		order.setItemId(1);
-//		order.setOrderId(1L);
-//		
-//		assertEquals(order, DAO.addItem(order));
-//	}
 	
-//	@Test
-//	public void testRemoveItem() {
-//		final Order updated = new Order(1L, 1, 1L);
-//		assertEquals(updated, DAO.removeItem(updated));
-//	}
-
 	@Test
 	public void testDelete() {
 		assertEquals(1, DAO.delete(1));

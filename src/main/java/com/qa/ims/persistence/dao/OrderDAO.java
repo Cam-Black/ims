@@ -71,6 +71,7 @@ public class OrderDAO implements Dao<Order> {
 		double itemCost = rs.getDouble("item_cost");
 		Item item = new Item(itemId, itemName, itemCost);
 		Order order = new Order(item, orderId);
+		System.out.println(order);
 		return order;
 	}
 	

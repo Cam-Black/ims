@@ -65,14 +65,16 @@ public class OrderDAO implements Dao<Order> {
 	}
 	
 	public Order orderItemsFromResultSet(ResultSet rs) throws SQLException {
-		Long orderId = rs.getLong("order_items_id");
+		Long orderId = rs.getLong("fk_order_id");
 		Long itemId = rs.getLong("item_id");
 		String itemName = rs.getString("item_name");
 		double itemCost = rs.getDouble("item_cost");
 		Item item = new Item(itemId, itemName, itemCost);
 		Order order = new Order(item, orderId);
+		System.out.println(order);
 		return order;
 	}
+	
 	@Override
 	public Order read(Long id) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
@@ -124,7 +126,7 @@ public class OrderDAO implements Dao<Order> {
 	
 	public Order addItem(Order order) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
-				PreparedStatement statement = connection.prepareStatement("INSERT INTO order_items (item_quantity, fk_item_id, fk_order_id) VALUES (?,  (SELECT item_id FROM items WHERE item_id = ?), (SELECT order_id FROM orders WHERE order_id = ?))");) {
+				PreparedStatement statement = connection.prepareStatement("INSERT INTO order_items (item_quantity, fk_item_id, fk_order_id) VALUES (?, ?, ?)");){
 			statement.setInt(1, order.getItemQuantity());
 			statement.setLong(2, order.getItemId());
 			statement.setLong(3, order.getOrderId());
@@ -137,9 +139,9 @@ public class OrderDAO implements Dao<Order> {
 		return null;
 	}
 	
-	public Order removeItem(Order order) {
+	public void removeItem(Order order) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
-				PreparedStatement statementOne = connection.prepareStatement("UPDATE order_items SET item_quantity = item_quantity - 1 WHERE item_quantity >= 0 && fk_item_id = ? && fk_order_id = ?");
+				PreparedStatement statementOne = connection.prepareStatement("UPDATE order_items SET item_quantity = item_quantity - 1 WHERE item_quantity >= 0 AND fk_item_id = ? AND fk_order_id = ? ORDER BY order_items_id DESC LIMIT 1");
 				PreparedStatement statementTwo = connection.prepareStatement("DELETE FROM order_items WHERE item_quantity = 0");) {
 			statementOne.setLong(1, order.getItemId());
 			statementOne.setLong(2, order.getOrderId());
@@ -149,7 +151,6 @@ public class OrderDAO implements Dao<Order> {
 			LOGGER.debug(e);
 			LOGGER.error(e.getMessage());
 		}
-		return null;
 	}
 	
 	@Override

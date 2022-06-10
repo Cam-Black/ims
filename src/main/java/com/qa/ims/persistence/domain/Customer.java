@@ -71,6 +71,4 @@ public class Customer {
 		return Objects.equals(customerId, other.customerId) && Objects.equals(firstName, other.firstName)
 				&& Objects.equals(surname, other.surname);
 	}
-
-	
 }

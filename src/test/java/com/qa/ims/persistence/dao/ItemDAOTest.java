@@ -7,14 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
-import com.qa.ims.persistence.domain.Customer;
+import com.qa.ims.persistence.domain.Item;
 import com.qa.ims.utils.DBUtils;
 
-public class CustomerDAOTest {
-
-	private final CustomerDAO DAO = new CustomerDAO();
+public class ItemDAOTest {
+	private final ItemDAO DAO = new ItemDAO();
 
 	@Before
 	public void setup() {
@@ -24,33 +24,32 @@ public class CustomerDAOTest {
 
 	@Test
 	public void testCreate() {
-		final Customer created = new Customer(2L, "chris", "perrins");
+		final Item created = new Item(2L, "The Witcher", 10.99);
 		assertEquals(created, DAO.create(created));
 	}
 
 	@Test
 	public void testReadAll() {
-		List<Customer> expected = new ArrayList<>();
-		expected.add(new Customer(1L, "jordan", "harrison"));
+		List<Item> expected = new ArrayList<>();
+		expected.add(new Item(1L, "Call of Duty", 25.99));
 		assertEquals(expected, DAO.readAll());
 	}
 
 	@Test
 	public void testReadLatest() {
-		assertEquals(new Customer(1L, "jordan", "harrison"), DAO.readLatest());
+		assertEquals(new Item(1L, "Call of Duty", 25.99), DAO.readLatest());
 	}
 
 	@Test
 	public void testRead() {
 		final long ID = 1L;
-		assertEquals(new Customer(ID, "jordan", "harrison"), DAO.read(ID));
+		assertEquals(new Item(ID, "Call of Duty", 25.99), DAO.read(ID));
 	}
 
 	@Test
 	public void testUpdate() {
-		final Customer updated = new Customer(1L, "chris", "perrins");
+		final Item updated = new Item(1L, "Modern Warfare", 15.99);
 		assertEquals(updated, DAO.update(updated));
-
 	}
 
 	@Test
@@ -59,19 +58,24 @@ public class CustomerDAOTest {
 	}
 	
 	@Test
-	public void testReadLatestException() {
-		DAO.delete(1L);
-		assertNull(DAO.readLatest());
-	}
-	@Test
 	public void testReadException() {
 	DAO.delete(1L);
 	assertNull(DAO.read(1L));
 	}
 	
 	@Test
+	public void testReadLatestException() {
+		DAO.delete(1L);
+		assertNull(DAO.readLatest());
+	}
+	
+	@Test
 	public void testCreateException() {
-		Customer customer = new Customer(null);
-		assertNull(DAO.create(customer));
+		assertNull(DAO.create(null));
+	}
+	
+	@Test 
+	public void testUpdateException() {
+		assertNull(DAO.update(null));
 	}
 }

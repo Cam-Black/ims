@@ -63,12 +63,43 @@ public class OrderControllerTest {
 
 	@Test
 	public void testAddItem() {
+		Long O_ID = 1L;
+		String add = "add";
+		Long I_ID = 1L;
+		int quantity = 1;
+		Item item = new Item(I_ID);
+		ItemDAO iDao = new ItemDAO();
+		item = iDao.read(item.getItemID());
+		Order order = dao.addItem(new Order(item.getItemID(), quantity, O_ID));
 		
+		Mockito.when(utils.getLong()).thenReturn(O_ID, I_ID);
+		Mockito.when(utils.getString()).thenReturn(add);
+		Mockito.when(utils.getInt()).thenReturn(quantity);
+		
+		assertEquals(order, controller.update());
+		
+		Mockito.verify(utils, Mockito.times(2)).getLong();
+		Mockito.verify(utils, Mockito.times(1)).getInt();
+		Mockito.verify(utils, Mockito.times(1)).getString();
 	}
 	
 	@Test
 	public void testRemoveItem() {
+		Long O_ID = 1L;
+		String delete = "delete";
+		Long I_ID = 1L;
+		Order order = new Order();
+		order.setOrderId(O_ID);
+		order.setItemId(I_ID);
+		dao.removeItem(order);
 		
+		Mockito.when(utils.getLong()).thenReturn(O_ID, I_ID);
+		Mockito.when(utils.getString()).thenReturn(delete);
+		
+		assertEquals(order, controller.update());
+		
+		Mockito.verify(utils, Mockito.times(2)).getLong();
+		Mockito.verify(utils, Mockito.times(1)).getString();
 	}
 
 	@Test

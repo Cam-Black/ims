@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.qa.ims.persistence.domain.Item;
@@ -78,9 +79,11 @@ public class ItemDAOTest {
 		assertNull(DAO.update(null));
 	}
 	
+	@Ignore
 	@Test
 	public void testDeleteException() throws Exception {
-		DAO.delete(-1);
+		DAO.delete(0);
+		assertNull(DAO.delete(0));
 		
 	}
 }

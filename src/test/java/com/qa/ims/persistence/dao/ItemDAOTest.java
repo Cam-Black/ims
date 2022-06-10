@@ -78,12 +78,4 @@ public class ItemDAOTest {
 	public void testUpdateException() {
 		assertNull(DAO.update(null));
 	}
-	
-	@Ignore
-	@Test
-	public void testDeleteException() throws Exception {
-		DAO.delete(0);
-		assertNull(DAO.delete(0));
-		
-	}
 }

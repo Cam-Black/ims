@@ -114,7 +114,7 @@ public class Order {
 	@Override
 	public String toString() {
 		String name = customer.getFirstName() + " " + customer.getSurname();
-		if (item == null) {
+		if (item == null || customer == null) {
 			return "Order ID: " + orderId + ", Customer ID: " + customer.getCustomerId();
 		}
 		else {

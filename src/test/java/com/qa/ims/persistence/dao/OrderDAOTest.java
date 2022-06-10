@@ -3,6 +3,8 @@ package com.qa.ims.persistence.dao;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.qa.ims.persistence.domain.Customer;
@@ -50,24 +53,36 @@ public class OrderDAOTest {
 		Customer customer = new Customer(1L);
 		assertEquals(new Order(customer, 1L), DAO.readLatest());
 	}
-
-//	@Test
-//	public void testRead() {
-//		Customer customer = new Customer(1L);
-//		final long ID = 1L;
-//		assertEquals(new Order(customer, ID), DAO.read(ID));
-//	}
+	
+	@Test
+	public void testRead() {
+		
+		Long oId = 1L;
+		Long iId = 1L;
+		Long cId = 1L;
+		String iName = "Call of Duty";
+		double iCost = 25.99;
+		Item item = new Item(iId, iName, iCost);
+		Customer customer = new Customer(cId);
+		CustomerDAO custDao = new CustomerDAO();
+		customer = custDao.read(customer.getCustomerId());
+		Order order = new Order();
+		order.setOrderId(1L);
+		order.setItem(item);
+		order.setCustomer(customer);
+		System.out.println(order);
+		
+		assertEquals(DAO.read(order.getOrderId()), null);
+	}
 
 //	@Test
 //	public void testAddItem() {
-//		CustomerDAO custDao = new CustomerDAO();
-//		ItemDAO iDao = new ItemDAO();
-//		Customer customer = new Customer(1L);
-//		Item item = new Item(1L);
-//		item = iDao.read(item.getItemID());
-//		customer = custDao.read(customer.getCustomerId());
-//		final Order updated = new Order(1L, customer, item, 1);
-//		assertEquals(updated, DAO.addItem(updated));
+//		Order order = new Order();
+//		order.setItemQuantity(1);
+//		order.setItemId(1);
+//		order.setOrderId(1L);
+//		
+//		assertEquals(order, DAO.addItem(order));
 //	}
 	
 //	@Test
@@ -100,24 +115,8 @@ public class OrderDAOTest {
 	}
 	
 	@Test
-	public void testReadAllException() {
-		
-	}
-	
-	@Test
 	public void testUpdate() {
 		Order order = new Order();
 		assertNull(DAO.update(order));
 	}
-	
-//	@Test
-//	public void testOrderItemsFromResultSet() {
-//		Order order = new Order();
-//		ResultSet rs = null;
-//		try {
-//			assertEquals(DAO.orderItemsFromResultSet(rs), order);
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//	}
 }

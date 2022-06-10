@@ -16,9 +16,18 @@ These instructions will get you a copy of the project up and running on your loc
     - In Windows search for:
     
      ![Windows Search Environment Variables](/Documentation/Screenshots/EnvironmentVariables.png)
-    - Then click on `Environment Variables...` ![](/Documentation/Screenshots/EnvironmentVariablesPart2.png)
-    - Next Create a `New` System Variable: ![](Documentation/Screenshots/EnvironmentVariablesPart3.png)
-    - Now add the `MYSQL_HOME` System Variable to your `Path` by selecting path then clicking `Edit`: ![](Documentation/Screenshots/EnvironmentVariablesPart4.png)
+    - Then click on `Environment Variables...`:
+    
+    ![](/Documentation/Screenshots/EnvironmentVariablesPart2.png)
+    
+    - Next Create a `New` System Variable:
+ 
+    ![](Documentation/Screenshots/EnvironmentVariablesPart3.png)
+    
+    - Now add the `MYSQL_HOME` System Variable to your `Path` by selecting path then clicking `Edit`:
+    
+    ![](Documentation/Screenshots/EnvironmentVariablesPart4.png)
+    
     - Close all dialog boxes by clicking `OK` recursively.
 
 
@@ -97,7 +106,7 @@ GitHub used as the online repository hosting service.
 ## Authors
 
 * **Jordan Benbelaid** - *Start Point* - [jordanbenbelaid](https://github.com/jordanbenbelaid/IMS-22EnableMay2)
-* **Cameron Black** - *Continued Development* - [cam-black](https://github.com/cam-black/ims)
+* **Cameron Black** - *Produced Deliverable MVP* - [cam-black](https://github.com/cam-black/ims)
 
 ## License
 

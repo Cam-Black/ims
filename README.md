@@ -20,21 +20,6 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Installing
 1. Once Java is downloaded, you will need to download the [fatjar file](https://github.com/Cam-Black/ims/blob/dev/ims-0.0.1-jar-with-dependencies.jar)
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
 
 ## Built With
 
@@ -53,9 +38,3 @@ GitHub used as the online repository hosting service.
 ## License
 
 This project is licensed under the MIT license - see the [LICENSE.md](LICENSE.md) file for details 
-
-*For help in [Choosing a license](https://choosealicense.com/)*
-
-## Acknowledgments
-
-- 

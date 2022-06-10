@@ -1,7 +1,7 @@
 Coverage: 68.5%
 # Inventory Management System
 
-An Command Line app that allows a user to Create, Read, Update and Delete from Customers, Items and Orders in the attached database, schema can be found in [src\main\resources](src\main\resources) folder.
+An Command Line app that allows a user to Create, Read, Update and Delete from Customers, Items and Orders in the attached database, schema can be found in [src\main\resources](src/main/resources) folder.
 
 ## Getting Started
 
@@ -15,16 +15,16 @@ These instructions will get you a copy of the project up and running on your loc
 4. After MySQL Workbench is installed, you will need to add it to your Environment Variables if you are on Windows:
     - In Windows search for:
     
-     ![Windows Search Environment Variables](Documentation\Screenshots\EnvironmentVariables.png)
-    - Then click on `Environment Variables...` ![](Documentation\Screenshots\EnvironmentVariablesPart2.png)
-    - Next Create a `New` System Variable: ![](Documentation\Screenshots\EnvironmentVariablesPart3.png)
-    - Now add the `MYSQL_HOME` System Variable to your `Path` by selecting path then clicking `Edit`: ![](Documentation\Screenshots\EnvironmentVariablesPart4.png)
+     ![Windows Search Environment Variables](/Documentation/Screenshots/EnvironmentVariables.png)
+    - Then click on `Environment Variables...` ![](/Documentation/Screenshots/EnvironmentVariablesPart2.png)
+    - Next Create a `New` System Variable: ![](Documentation/Screenshots/EnvironmentVariablesPart3.png)
+    - Now add the `MYSQL_HOME` System Variable to your `Path` by selecting path then clicking `Edit`: ![](Documentation/Screenshots/EnvironmentVariablesPart4.png)
     - Close all dialog boxes by clicking `OK` recursively.
 
 
 ### Installing
 1. Now the setup is done, open up MySQL and sign in using the password you would have created earlier.
-2. Navigate to the [src\main\resources](src\main\resources) folder and open the [sql-schema](src\main\resources\sql-schema.sql) schema file inside MySQL Workbench then Execute the query.
+2. Navigate to the [src\main\resources](src/main/resources) folder and open the [sql-schema](src/main/resources/sql-schema.sql) schema file inside MySQL Workbench then Execute the query.
 3. Your database is now all set up to be used with the jar file. Now open your preffered terminal and navigate to the folder where you cloned the repository.
 4. Once there, execute the command 
 ```

@@ -98,6 +98,10 @@ Customer ID: 1 First Name: Foo Surname: Bar
 
 * [Maven](https://maven.apache.org/) - Dependency Management
 
+## Tested With
+
+* [JUnit](https://junit.org/junit4/) - Integration and Unit Testing
+
 ## Versioning
 
 Git was used for Version Control.

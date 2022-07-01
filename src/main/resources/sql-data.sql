@@ -1,1 +1,1 @@
-INSERT INTO `ims`.`customers` (`first_name`, `surname`) VALUES ('jordan', 'harrison');
+INSERT INTO `customers` (`id`, `first_name`, `surname`) VALUES (1, 'jordan', 'harrison');

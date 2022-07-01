@@ -1,8 +1,10 @@
 package com.qa.ims.persistence.domain;
 
+import java.util.Objects;
+
 public class Customer {
 
-	private Long id;
+	private Long customerId;
 	private String firstName;
 	private String surname;
 
@@ -11,18 +13,24 @@ public class Customer {
 		this.setSurname(surname);
 	}
 
-	public Customer(Long id, String firstName, String surname) {
-		this.setId(id);
+	public Customer(Long customerId, String firstName, String surname) {
+		this.setCustomerId(customerId);
 		this.setFirstName(firstName);
 		this.setSurname(surname);
 	}
 
-	public Long getId() {
-		return id;
+	public Customer() {}
+
+	public Customer(Long custId) {
+		this.customerId = custId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public Long getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(Long id) {
+		this.customerId = id;
 	}
 
 	public String getFirstName() {
@@ -43,17 +51,12 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return "id:" + id + " first name:" + firstName + " surname:" + surname;
-	}	
-	
+		return "Customer ID: " + customerId + " First Name: " + firstName + " Surname: " + surname;
+	}
+
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((surname == null) ? 0 : surname.hashCode());
-		return result;
+		return Objects.hash(customerId, firstName, surname);
 	}
 
 	@Override
@@ -65,22 +68,7 @@ public class Customer {
 		if (getClass() != obj.getClass())
 			return false;
 		Customer other = (Customer) obj;
-		if (getFirstName() == null) {
-			if (other.getFirstName() != null)
-				return false;
-		} else if (!getFirstName().equals(other.getFirstName()))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (surname == null) {
-			if (other.surname != null)
-				return false;
-		} else if (!surname.equals(other.surname))
-			return false;
-		return true;
+		return Objects.equals(customerId, other.customerId) && Objects.equals(firstName, other.firstName)
+				&& Objects.equals(surname, other.surname);
 	}
-
 }
